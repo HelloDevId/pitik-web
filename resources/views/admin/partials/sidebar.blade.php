@@ -31,6 +31,12 @@
                 </a>
             </li>
             <li class="nav-item w-100">
+                <a class="nav-link" href="/datacatatayam">
+                    <i class="fe fe-command fe-16"></i>
+                    <span class="ml-3 item-text">Data Catat Ayam</span>
+                </a>
+            </li>
+            <li class="nav-item w-100">
                 <a class="nav-link" href="/datapakan">
                     <i class="fe fe-slack fe-16"></i>
                     <span class="ml-3 item-text">Data Pakan</span>
@@ -43,9 +49,21 @@
                 </a>
             </li>
             <li class="nav-item w-100">
+                <a class="nav-link" href="/datauser">
+                    <i class="fe fe-users fe-16"></i>
+                    <span class="ml-3 item-text">Data User</span>
+                </a>
+            </li>
+            <li class="nav-item w-100">
                 <a class="nav-link" href="/datatenagakerja">
                     <i class="fe fe-user fe-16"></i>
                     <span class="ml-3 item-text">Data Tenaga Kerja</span>
+                </a>
+            </li>
+            <li class="nav-item w-100">
+                <a class="nav-link" href="/datasamplejual">
+                    <i class="fe fe-shopping-bag fe-16"></i>
+                    <span class="ml-3 item-text">Data Sample Jual</span>
                 </a>
             </li>
             <li class="nav-item w-100">
