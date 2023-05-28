@@ -10,7 +10,7 @@ class PakanDetailController extends Controller
     public function index()
     {
         $pakandetail = DetailPakan::all();
-        return view('admin.pages.datapakandetail', [
+        return view('admin.pages.datapakan', [
             'pakandetail' => $pakandetail,
         ]);
     }
@@ -22,31 +22,33 @@ class PakanDetailController extends Controller
             'jenis_pakan' => 'required',
             'stok_pakan' => 'required',
             'harga_kg' => 'required',
-            'total_harga' => 'required',
+            // 'total_harga' => 'required',
 
         ], [
                 'pembelian.required' => 'Pembelian tidak boleh kosong',
                 'jenis_pakan.required' => 'Jenis Pakan tidak boleh kosong',
                 'stok_pakan.required' => 'Stok Pakan tidak boleh kosong',
                 'harga_kg.required' => 'Harga per Kg tidak boleh kosong',
-                'total_harga.required' => 'Total Harga tidak boleh kosong',
+                // 'total_harga.required' => 'Total Harga tidak boleh kosong',
 
 
             ]);
+
+        $total_harga = $request->stok_pakan * $request->harga_kg;
 
         DetailPakan::create([
             'pembelian' => $request->pembelian,
             'jenis_pakan' => $request->jenis_pakan,
             'stok_pakan' => $request->stok_pakan,
             'harga_kg' => $request->harga_kg,
-            'total_harga' => $request->total_harga,
+            'total_harga' => $total_harga,
 
         ]);
 
-        return redirect('/datapakandetail')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/datapakan')->with('create', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
 
         $request->validate([
@@ -54,15 +56,17 @@ class PakanDetailController extends Controller
             'jenis_pakan' => 'required',
             'stok_pakan' => 'required',
             'harga_kg' => 'required',
-            'total_harga' => 'required',
+            // 'total_harga' => 'required',
 
         ], [
                 'pembelian.required' => 'Pembelian tidak boleh kosong',
                 'jenis_pakan.required' => 'Jenis Pakan tidak boleh kosong',
                 'stok_pakan.required' => 'Stok Pakan tidak boleh kosong',
                 'harga_kg.required' => 'Harga per Kg tidak boleh kosong',
-                'total_harga.required' => 'Total Harga tidak boleh kosong',
+                // 'total_harga.required' => 'Total Harga tidak boleh kosong',
             ]);
+
+        $total_harga = $request->stok_pakan * $request->harga_kg;
 
         DetailPakan::where('id', $id)
             ->update([
@@ -70,16 +74,16 @@ class PakanDetailController extends Controller
                 'jenis_pakan' => $request->jenis_pakan,
                 'stok_pakan' => $request->stok_pakan,
                 'harga_kg' => $request->harga_kg,
-                'total_harga' => $request->total_harga,
+                'total_harga' => $total_harga,
             ]);
 
-        return redirect('/datapakandetail')->with('success', 'Data Berhasil Diubah');
+        return redirect('/datapakan')->with('update', 'Data Berhasil Diubah');
 
     }
 
     public function destroy($id)
     {
-        DetailPakan::destroy($id);
-        return redirect('/datapakandetail')->with('success', 'Data Berhasil Dihapus');
+        DetailPakan::find($id)->delete();
+        return redirect('/datapakan')->with('delete', 'Data Berhasil Dihapus');
     }
 }

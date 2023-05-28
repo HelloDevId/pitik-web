@@ -9,8 +9,8 @@ class UserDetailController extends Controller
 {
     public function index()
     {
-        $userdetail = UserDetail::all();
-        return view('admin.pages.datauserdetail', [
+        $userdetail = UserDetail::where('id_level', '2')->get();
+        return view('admin.pages.datauser', [
             'userdetail' => $userdetail,
         ]);
     }
@@ -20,6 +20,7 @@ class UserDetailController extends Controller
         $request->validate([
             'email' => 'required|email|unique:user_detail,email',
             'password' => 'required|min:8',
+            'repassword' => 'required|same:password',
             'user_fullname' => 'required',
         ], [
                 'email.required' => 'Email tidak boleh kosong',
@@ -27,6 +28,8 @@ class UserDetailController extends Controller
                 'email.unique' => 'Email sudah terdaftar',
                 'password.required' => 'Password tidak boleh kosong',
                 'password.min' => 'Password minimal 8 karakter',
+                'repassword.required' => 'Konfirmasi password tidak boleh kosong',
+                'repassword.same' => 'Konfirmasi password tidak sama',
                 'user_fullname.required' => 'Nama tidak boleh kosong',
             ]);
 
@@ -36,33 +39,73 @@ class UserDetailController extends Controller
             'user_fullname' => $request->user_fullname,
             'id_level' => '2',
         ]);
+
+        return redirect('/datauser')->with('create', 'Data user berhasil ditambahkan!');
     }
 
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'email' => 'required|email|unique:user_detail,email,' . $id,
-            'password' => 'required|min:8',
-            'user_fullname' => 'required',
-        ], [
-                'email.required' => 'Email tidak boleh kosong',
-                'email.email' => 'Email tidak valid',
-                'email.unique' => 'Email sudah terdaftar',
-                'password.required' => 'Password tidak boleh kosong',
-                'password.min' => 'Password minimal 8 karakter',
-                'user_fullname.required' => 'Nama tidak boleh kosong',
+        if ($request->password == null) {
+
+            $request->validate([
+                'email' => 'required|email|unique:user_detail,email,' . $id,
+                // 'password' => 'required|min:8',
+                // 'repassword' => 'required|same:password',
+                'user_fullname' => 'required',
+            ], [
+                    'email.required' => 'Email tidak boleh kosong',
+                    'email.email' => 'Email tidak valid',
+                    'email.unique' => 'Email sudah terdaftar',
+                    // 'password.required' => 'Password tidak boleh kosong',
+                    // 'password.min' => 'Password minimal 8 karakter',
+                    // 'repassword.required' => 'Konfirmasi password tidak boleh kosong',
+                    // 'repassword.same' => 'Konfirmasi password tidak sama',
+                    'user_fullname.required' => 'Nama tidak boleh kosong',
+                ]);
+
+            UserDetail::where('id', $id)->update([
+                'email' => $request->email,
+                // 'password' => bcrypt($request->password),
+                'user_fullname' => $request->user_fullname,
+                'id_level' => '2',
             ]);
 
-        UserDetail::where('id', $id)->update([
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'user_fullname' => $request->user_fullname,
-            'id_level' => '2',
-        ]);
+            return redirect('/datauser')->with('update', 'Data user berhasil diubah!');
+
+        } else {
+
+            $request->validate([
+                'email' => 'required|email|unique:user_detail,email,' . $id,
+                'password' => 'required|min:8',
+                'repassword' => 'required|same:password',
+                'user_fullname' => 'required',
+            ], [
+                    'email.required' => 'Email tidak boleh kosong',
+                    'email.email' => 'Email tidak valid',
+                    'email.unique' => 'Email sudah terdaftar',
+                    'password.required' => 'Password tidak boleh kosong',
+                    'password.min' => 'Password minimal 8 karakter',
+                    'repassword.required' => 'Konfirmasi password tidak boleh kosong',
+                    'repassword.same' => 'Konfirmasi password tidak sama',
+                    'user_fullname.required' => 'Nama tidak boleh kosong',
+                ]);
+
+            UserDetail::where('id', $id)->update([
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'user_fullname' => $request->user_fullname,
+                'id_level' => '2',
+            ]);
+
+            return redirect('/datauser')->with('update', 'Data user berhasil diubah!');
+        }
+
+
     }
 
     public function destroy($id)
     {
-        UserDetail::destroy($id);
+        UserDetail::find($id)->delete();
+        return redirect('/datauser')->with('delete', 'Data user berhasil dihapus!');
     }
 }

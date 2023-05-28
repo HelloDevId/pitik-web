@@ -25,11 +25,10 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Id</th>
+
                                             <th>Nama Customer</th>
                                             <th>Tanggal</th>
                                             <th>Contact</th>
-                                            <th>Jumlah Ayam</th>
                                             <th>Harga Satuan</th>
                                             <th>Payment</th>
                                             <th>Address</th>
@@ -37,93 +36,165 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>p</td>
-                                            <td>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($distribusi as $data)
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
 
-                                                <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                    data-target="#editModal">Edit</button>
+                                                <td>{{ $data->customer }}</td>
+                                                <td>{{ $data->tanggal_distribusi }}</td>
+                                                <td>{{ $data->contact }}</td>
+                                                <td>{{ $data->harga_satuan }}</td>
+                                                <td>{{ $data->payment }}</td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#detailModal{{ $data->id }}">Detail</button>
+                                                </td>
+                                                <td>
 
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#deleteModal">Delete</button>
+                                                    <button class="btn btn-warning btn-sm" data-toggle="modal"
+                                                        data-target="#editModal{{ $data->id }}">Edit</button>
 
-                                            </td>
-                                        </tr>
+                                                    <button class="btn btn-danger btn-sm" data-toggle="modal"
+                                                        data-target="#deleteModal{{ $data->id }}">Delete</button>
 
-                                        <!-- Delete Modal -->
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="defaultModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="defaultModalLabel">Delete Modal</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Yakin Ingin Menghapus Data?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn mb-2 btn-success"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn mb-2 btn-danger">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                </td>
+                                            </tr>
 
-                                        <!-- Edit Modal -->
-                                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="defaultModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="defaultModalLabel">Edit Modal</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                    class="col-form-label">Label</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name"
-                                                                    class="col-form-label">Date</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="recipient-name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="message-text"
-                                                                    class="col-form-label">Label</label>
-                                                                <textarea class="form-control" id="message-text"></textarea>
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteModal{{ $data->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="defaultModalLabel">Delete Modal</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Yakin Ingin Menghapus Data?
+                                                        </div>
+                                                        <form action="/datadistribusi/{{ $data->id }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn mb-2 btn-success"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit"
+                                                                    class="btn mb-2 btn-danger">Delete</button>
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn mb-2 btn-danger"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn mb-2 btn-success">Save
-                                                            changes</button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="detailModal{{ $data->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="defaultModalLabel">Detail Modal</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Address</label>
+                                                                <textarea rows="5" class="form-control" id="message-text">{{ $data->address }}</textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn mb-2 btn-success"
+                                                                data-dismiss="modal">Close</button>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                            <!-- Edit Modal -->
+                                            <div class="modal fade" id="editModal{{ $data->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="defaultModalLabel">Edit Modal
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="/datadistribusi/{{ $data->id }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name"
+                                                                        class="col-form-label">Customer</label>
+                                                                    <input type="text" value="{{ $data->customer }}"
+                                                                        name="customer" class="form-control"
+                                                                        id="recipient-name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name"
+                                                                        class="col-form-label">Tanggal Distribusi
+                                                                    </label>
+                                                                    <input type="date"
+                                                                        value="{{ $data->tanggal_distribusi }}"
+                                                                        name="tanggal_distribusi" class="form-control"
+                                                                        id="recipient-name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name"
+                                                                        class="col-form-label">Contact</label>
+                                                                    <input type="text" value=" {{ $data->contact }}"
+                                                                        name="contact" class="form-control"
+                                                                        id="recipient-name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name"
+                                                                        class="col-form-label">Harga
+                                                                        Satuan</label>
+                                                                    <input type="text"
+                                                                        value="{{ $data->harga_satuan }}"
+                                                                        name="harga_satuan" class="form-control"
+                                                                        id="recipient-name">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name"
+                                                                        class="col-form-label">Payment</label>
+                                                                    <input type="text" value="{{ $data->payment }}"
+                                                                        name="payment" class="form-control"
+                                                                        id="recipient-name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="message-text"
+                                                                        class="col-form-label">Address</label>
+                                                                    <textarea name="address" rows="5" class="form-control" id="message-text">{{ $data->address }}</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn mb-2 btn-danger"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn mb-2 btn-success">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <!-- Add Modal -->
@@ -138,27 +209,52 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <form>
+                                            <form action="/datadistribusi" method="POST">
+                                                @csrf
+                                                @method('POST')
+                                                <div class="modal-body">
                                                     <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">Label</label>
-                                                        <input type="text" class="form-control" id="recipient-name">
+                                                        <label for="recipient-name"
+                                                            class="col-form-label">Customer</label>
+                                                        <input type="text" value="" name="customer"
+                                                            class="form-control" id="recipient-name">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">Date</label>
-                                                        <input type="date" class="form-control" id="recipient-name">
+                                                        <label for="recipient-name" class="col-form-label">Tanggal
+                                                            Distribusi
+                                                        </label>
+                                                        <input type="date" value="" name="tanggal_distribusi"
+                                                            class="form-control" id="recipient-name">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="message-text" class="col-form-label">Label</label>
-                                                        <textarea class="form-control" id="message-text"></textarea>
+                                                        <label for="recipient-name" class="col-form-label">Contact</label>
+                                                        <input type="text" value="" name="contact"
+                                                            class="form-control" id="recipient-name">
                                                     </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn mb-2 btn-danger"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn mb-2 btn-success">Save changes</button>
-                                            </div>
+                                                    <div class="form-group">
+                                                        <label for="recipient-name" class="col-form-label">Harga
+                                                            Satuan</label>
+                                                        <input type="text" value="" name="harga_satuan"
+                                                            class="form-control" id="recipient-name">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="recipient-name" class="col-form-label">Payment</label>
+                                                        <input type="text" value="" name="payment"
+                                                            class="form-control" id="recipient-name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Address</label>
+                                                        <textarea name="address" rows="5" class="form-control" id="message-text"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn mb-2 btn-danger"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn mb-2 btn-success">Save
+                                                        changes</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -181,4 +277,44 @@
             ]
         });
     </script>
+@endsection
+
+@section('sweetalert')
+    @if (Session::get('update'))
+        <script>
+            Swal.fire(
+                'Success',
+                'Data Berhasil Di Update',
+                'success'
+            )
+        </script>
+    @endif
+    @if (Session::get('delete'))
+        <script>
+            Swal.fire(
+                'Success',
+                'Data Berhasil Di Hapus',
+                'success'
+            )
+        </script>
+    @endif
+    @if (Session::get('create'))
+        <script>
+            Swal.fire(
+                'Success',
+                'Data Berhasil Ditambahkan',
+                'success'
+            )
+        </script>
+    @endif
+    @if (Session::get('gagal'))
+        <script>
+            Swal.fire(
+                'Success',
+                'Data Gagal Ditambahkan',
+                'error'
+            )
+        </script>
+    @endif
+
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataAyam;
 use App\Models\CatatAyam;
 use Illuminate\Http\Request;
 
@@ -9,9 +10,11 @@ class CatatAyamController extends Controller
 {
     public function index()
     {
+        $id_ayam = DataAyam::all();
         $catatayam = CatatAyam::all();
-        return view('admin.pages.dataayam', [
-            'dataayam' => $catatayam,
+        return view('admin.pages.datacatatayam', [
+            'catatayam' => $catatayam,
+            'id_ayam' => $id_ayam,
         ]);
     }
 
@@ -38,7 +41,7 @@ class CatatAyamController extends Controller
             'mati' => $request->mati,
         ]);
 
-        return redirect('/dataayam')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/datacatatayam')->with('create', 'Data Berhasil Ditambahkan');
 
     }
 
@@ -65,13 +68,13 @@ class CatatAyamController extends Controller
                 'mati' => $request->mati,
             ]);
 
-        return redirect('/dataayam')->with('success', 'Data Berhasil Diubah');
+        return redirect('/datacatatayam')->with('update', 'Data Berhasil Diubah');
     }
 
     public function destroy($id)
     {
-        CatatAyam::destroy($id);
-        return redirect('/dataayam')->with('success', 'Data Berhasil Dihapus');
+        CatatAyam::find($id)->delete();
+        return redirect('/datacatatayam')->with('delete', 'Data Berhasil Dihapus');
     }
 
 }

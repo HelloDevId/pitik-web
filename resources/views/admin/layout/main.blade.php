@@ -26,6 +26,7 @@
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href="{{ asset('admin/css/daterangepicker.css') }}">
     <!-- App CSS -->
+    <link href="{{ asset('admin/vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/css/app-light.css') }}" id="lightTheme">
     <link rel="stylesheet" href="{{ asset('admin/css/app-dark.css') }}" id="darkTheme" disabled>
 </head>
@@ -219,7 +220,9 @@
             </div>
         </main> <!-- main -->
     </div> <!-- .wrapper -->
-    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    {{-- <script src="{{ asset('admin/js/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('admin/js/popper.min.js') }}"></script>
     <script src="{{ asset('admin/js/moment.min.js') }}"></script>
     <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
@@ -236,6 +239,7 @@
     <script src="{{ asset('admin/js/Chart.min.js') }}"></script>
     <script src='{{ asset('admin/js/jquery.dataTables.min.js') }}'></script>
     <script src='{{ asset('admin/js/dataTables.bootstrap4.min.js') }}'></script>
+
     <script>
         /* defind global options */
         Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
@@ -253,6 +257,11 @@
     <script src='{{ asset('admin/js/dropzone.min.js') }}'></script>
     <script src='{{ asset('admin/js/uppy.min.js') }}'></script>
     <script src='{{ asset('admin/js/quill.min.js') }}'></script>
+    <script src="{{ asset('admin/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/sweetalert.init.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         $('.select2').select2({
             theme: 'bootstrap4',
@@ -437,6 +446,9 @@
         gtag('config', 'UA-56159088-1');
     </script>
     @yield('script')
+
 </body>
 
 </html>
+
+@yield('sweetalert')

@@ -22,7 +22,7 @@ class PengeluaranController extends Controller
             'harga_pakan' => 'required',
             'tgl_beli_pakan' => 'required',
             'biaya_vaksin' => 'required',
-            'tgl_valsin' => 'required',
+            'tgl_vaksin' => 'required',
             'tenaga_kerja' => 'required',
             'bibit_ayam' => 'required',
 
@@ -30,7 +30,7 @@ class PengeluaranController extends Controller
                 'harga_pakan.required' => 'Harga Pakan tidak boleh kosong',
                 'tgl_beli_pakan.required' => 'Tanggal Beli Pakan tidak boleh kosong',
                 'biaya_vaksin.required' => 'Biaya Vaksin tidak boleh kosong',
-                'tgl_valsin.required' => 'Tanggal Vaksin tidak boleh kosong',
+                'tgl_vaksin.required' => 'Tanggal Vaksin tidak boleh kosong',
                 'tenaga_kerja.required' => 'Tenaga Kerja tidak boleh kosong',
                 'bibit_ayam.required' => 'Bibit Ayam tidak boleh kosong',
 
@@ -40,22 +40,22 @@ class PengeluaranController extends Controller
             'harga_pakan' => $request->harga_pakan,
             'tgl_beli_pakan' => $request->tgl_beli_pakan,
             'biaya_vaksin' => $request->biaya_vaksin,
-            'tgl_valsin' => $request->tgl_valsin,
+            'tgl_vaksin' => $request->tgl_vaksin,
             'tenaga_kerja' => $request->tenaga_kerja,
             'bibit_ayam' => $request->bibit_ayam,
 
         ]);
 
-        return redirect('/datapengeluaran')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/datapengeluaran')->with('create', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'harga_pakan' => 'required',
             'tgl_beli_pakan' => 'required',
             'biaya_vaksin' => 'required',
-            'tgl_valsin' => 'required',
+            'tgl_vaksin' => 'required',
             'tenaga_kerja' => 'required',
             'bibit_ayam' => 'required',
 
@@ -63,7 +63,7 @@ class PengeluaranController extends Controller
                 'harga_pakan.required' => 'Harga Pakan tidak boleh kosong',
                 'tgl_beli_pakan.required' => 'Tanggal Beli Pakan tidak boleh kosong',
                 'biaya_vaksin.required' => 'Biaya Vaksin tidak boleh kosong',
-                'tgl_valsin.required' => 'Tanggal Vaksin tidak boleh kosong',
+                'tgl_vaksin.required' => 'Tanggal Vaksin tidak boleh kosong',
                 'tenaga_kerja.required' => 'Tenaga Kerja tidak boleh kosong',
                 'bibit_ayam.required' => 'Bibit Ayam tidak boleh kosong',
 
@@ -73,13 +73,13 @@ class PengeluaranController extends Controller
         $pengeluaran->harga_pakan = $request->harga_pakan;
         $pengeluaran->tgl_beli_pakan = $request->tgl_beli_pakan;
         $pengeluaran->biaya_vaksin = $request->biaya_vaksin;
-        $pengeluaran->tgl_valsin = $request->tgl_valsin;
+        $pengeluaran->tgl_vaksin = $request->tgl_vaksin;
         $pengeluaran->tenaga_kerja = $request->tenaga_kerja;
         $pengeluaran->bibit_ayam = $request->bibit_ayam;
 
         $pengeluaran->save();
 
-        return redirect('/datapengeluaran')->with('success', 'Data Berhasil Diubah');
+        return redirect('/datapengeluaran')->with('update', 'Data Berhasil Diubah');
     }
 
     public function destroy($id)
@@ -87,6 +87,6 @@ class PengeluaranController extends Controller
         $pengeluaran = Pengeluaran::find($id);
         $pengeluaran->delete();
 
-        return redirect('/datapengeluaran')->with('success', 'Data Berhasil Dihapus');
+        return redirect('/datapengeluaran')->with('delete', 'Data Berhasil Dihapus');
     }
 }

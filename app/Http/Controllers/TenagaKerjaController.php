@@ -36,7 +36,7 @@ class TenagaKerjaController extends Controller
             'total_gaji' => $request->total_gaji,
         ]);
 
-        return redirect('/datatenagakerja')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/datatenagakerja')->with('create', 'Data Berhasil Ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -61,7 +61,7 @@ class TenagaKerjaController extends Controller
         $tenagakerja->total_gaji = $request->total_gaji;
         $tenagakerja->save();
 
-        return redirect('/datatenagakerja')->with('success', 'Data Berhasil Diubah');
+        return redirect('/datatenagakerja')->with('update', 'Data Berhasil Diubah');
     }
 
     public function destroy($id)
@@ -69,6 +69,6 @@ class TenagaKerjaController extends Controller
         $tenagakerja = TenagaKerja::find($id);
         $tenagakerja->delete();
 
-        return redirect('/datatenagakerja')->with('success', 'Data Berhasil Dihapus');
+        return redirect('/datatenagakerja')->with('delete', 'Data Berhasil Dihapus');
     }
 }

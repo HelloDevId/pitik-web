@@ -14,9 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('customer');
             $table->date('tanggal_distribusi');
-            $table->integer('contact');
+            $table->string('contact');
             $table->integer('harga_satuan');
-            $table->integer('payment');
+            $table->string('payment');
             $table->string('address');
             $table->timestamps();
         });

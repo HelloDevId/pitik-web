@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->integer('biaya_vaksin');
             $table->date('tgl_vaksin');
             $table->string('tenaga_kerja');
-            $table->integer('bibit_ayam');
+            $table->string('bibit_ayam');
             $table->timestamps();
         });
     }

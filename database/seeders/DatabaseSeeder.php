@@ -4,6 +4,17 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\CatatAyam;
+use App\Models\DataAyam;
+use App\Models\DetailPakan;
+use App\Models\Distribusi;
+use App\Models\LevelDetail;
+use App\Models\Pendapatan;
+use App\Models\Pengeluaran;
+use App\Models\SampleJual;
+use App\Models\TenagaKerja;
+use App\Models\UserDetail;
+use App\Models\VaksinDetail;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +29,21 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        LevelDetail::create([
+            'level' => 'Admin',
+        ]);
+
+        LevelDetail::create([
+            'level' => 'User',
+        ]);
+
+        UserDetail::create([
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+            'user_fullname' => 'Admin',
+            'id_level' => '1',
+        ]);
+
     }
 }

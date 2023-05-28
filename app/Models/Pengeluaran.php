@@ -17,7 +17,7 @@ class Pengeluaran extends Model
         'biaya_vaksin',
         'tgl_vaksin',
         'tenaga_kerja',
-        'bibit_ayam,'
+        'bibit_ayam',
     ];
 
 }

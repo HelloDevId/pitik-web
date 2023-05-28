@@ -19,7 +19,7 @@ class DistribusiController extends Controller
     {
         $request->validate([
             'customer' => 'required',
-            'tanggal' => 'required',
+            'tanggal_distribusi' => 'required',
             'contact' => 'required',
             'harga_satuan' => 'required',
             'payment' => 'required',
@@ -27,7 +27,7 @@ class DistribusiController extends Controller
 
         ], [
                 'customer.required' => 'Customer tidak boleh kosong',
-                'tanggal.required' => 'Tanggal tidak boleh kosong',
+                'tanggal_distribusi.required' => 'Tanggal tidak boleh kosong',
                 'contact.required' => 'Contact tidak boleh kosong',
                 'harga_satuan.required' => 'Harga Satuan tidak boleh kosong',
                 'payment.required' => 'Payment tidak boleh kosong',
@@ -36,14 +36,14 @@ class DistribusiController extends Controller
 
         Distribusi::create([
             'customer' => $request->customer,
-            'tanggal' => $request->tanggal,
+            'tanggal_distribusi' => $request->tanggal_distribusi,
             'contact' => $request->contact,
             'harga_satuan' => $request->harga_satuan,
             'payment' => $request->payment,
             'address' => $request->address,
         ]);
 
-        return redirect('/datadistribusi')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/datadistribusi')->with('create', 'Data Berhasil Ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -51,14 +51,14 @@ class DistribusiController extends Controller
 
         $request->validate([
             'customer' => 'required',
-            'tanggal' => 'required',
+            'tanggal_distribusi' => 'required',
             'contact' => 'required',
             'harga_satuan' => 'required',
             'payment' => 'required',
             'address' => 'required',
         ], [
                 'customer.required' => 'Customer tidak boleh kosong',
-                'tanggal.required' => 'Tanggal tidak boleh kosong',
+                'tanggal_distribusi.required' => 'Tanggal tidak boleh kosong',
                 'contact.required' => 'Contact tidak boleh kosong',
                 'harga_satuan.required' => 'Harga Satuan tidak boleh kosong',
                 'payment.required' => 'Payment tidak boleh kosong',
@@ -68,19 +68,19 @@ class DistribusiController extends Controller
         Distribusi::where('id', $id)
             ->update([
                 'customer' => $request->customer,
-                'tanggal' => $request->tanggal,
+                'tanggal_distribusi' => $request->tanggal_distribusi,
                 'contact' => $request->contact,
                 'harga_satuan' => $request->harga_satuan,
                 'payment' => $request->payment,
                 'address' => $request->address,
             ]);
 
-        return redirect('/datadistribusi')->with('success', 'Data Berhasil Diubah');
+        return redirect('/datadistribusi')->with('update', 'Data Berhasil Diubah');
     }
 
     public function destroy($id)
     {
         Distribusi::destroy($id);
-        return redirect('/datadistribusi')->with('success', 'Data Berhasil Dihapus');
+        return redirect('/datadistribusi')->with('delete', 'Data Berhasil Dihapus');
     }
 }

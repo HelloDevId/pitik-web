@@ -37,7 +37,7 @@ class PendapatanController extends Controller
             'pendapatan' => $request->pendapatan,
         ]);
 
-        return redirect('/datapendapatan')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/datapendapatan')->with('create', 'Data Berhasil Ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -62,7 +62,7 @@ class PendapatanController extends Controller
         $pendapatan->pendapatan = $request->pendapatan;
         $pendapatan->save();
 
-        return redirect('/datapendapatan')->with('success', 'Data Berhasil Diubah');
+        return redirect('/datapendapatan')->with('update', 'Data Berhasil Diubah');
 
     }
 
@@ -71,6 +71,6 @@ class PendapatanController extends Controller
         $pendapatan = Pendapatan::find($id);
         $pendapatan->delete();
 
-        return redirect('/datapendapatan')->with('success', 'Data Berhasil Dihapus');
+        return redirect('/datapendapatan')->with('delete', 'Data Berhasil Dihapus');
     }
 }
