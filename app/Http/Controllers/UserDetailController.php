@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserDetailController extends Controller
 {
     public function index()
     {
-        $userdetail = UserDetail::where('id_level', '2')->get();
+        $userdetail = User::where('id_level', '2')->get();
         return view('admin.pages.datauser', [
             'userdetail' => $userdetail,
         ]);
@@ -33,7 +33,7 @@ class UserDetailController extends Controller
                 'user_fullname.required' => 'Nama tidak boleh kosong',
             ]);
 
-        UserDetail::create([
+        User::create([
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'user_fullname' => $request->user_fullname,
@@ -63,7 +63,7 @@ class UserDetailController extends Controller
                     'user_fullname.required' => 'Nama tidak boleh kosong',
                 ]);
 
-            UserDetail::where('id', $id)->update([
+            User::where('id', $id)->update([
                 'email' => $request->email,
                 // 'password' => bcrypt($request->password),
                 'user_fullname' => $request->user_fullname,
@@ -90,7 +90,7 @@ class UserDetailController extends Controller
                     'user_fullname.required' => 'Nama tidak boleh kosong',
                 ]);
 
-            UserDetail::where('id', $id)->update([
+            User::where('id', $id)->update([
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'user_fullname' => $request->user_fullname,
@@ -105,7 +105,7 @@ class UserDetailController extends Controller
 
     public function destroy($id)
     {
-        UserDetail::find($id)->delete();
+        User::find($id)->delete();
         return redirect('/datauser')->with('delete', 'Data user berhasil dihapus!');
     }
 }

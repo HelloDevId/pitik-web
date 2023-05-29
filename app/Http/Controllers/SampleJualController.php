@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\SampleJual;
-use App\Models\UserDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SampleJualController extends Controller
 {
     public function index()
     {
-        $datauser = UserDetail::where('id_level', '2')->get();
+        $datauser = User::where('id_level', '2')->get();
         $samplejual = SampleJual::with('userdetail')->get();
         return view('admin.pages.datasamplejual', [
             'samplejual' => $samplejual,

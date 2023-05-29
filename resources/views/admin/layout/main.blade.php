@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <!-- Delete Modal -->
+            <!-- Logout Modal -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
                 aria-labelledby="defaultModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -213,7 +213,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn mb-2 btn-success" data-dismiss="modal">Close</button>
-                            <a href="/login" class="btn mb-2 btn-danger">Yes</a>
+                            <a href="/logout" class="btn mb-2 btn-danger">Yes</a>
                         </div>
                     </div>
                 </div>

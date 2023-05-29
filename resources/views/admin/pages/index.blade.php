@@ -412,3 +412,35 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 @endsection
+
+@section('sweetalert')
+    @if (Session::get('loginberhasil'))
+        <script>
+            Swal.fire("Well Done", "Anda Berhasil Login", "success");
+        </script>
+    @endif
+
+    @if (Session::get('updateprofil'))
+        <script>
+            Swal.fire("Well Done", "Profil Berhasil Diperbarui", "success");
+        </script>
+    @endif
+
+    @if (Session::get('updateprofilerror'))
+        <script>
+            Swal.fire("Opps!!", "Password Anda Salah", "error");
+        </script>
+    @endif
+
+    @if (Session::get('passwordtidaksama'))
+        <script>
+            Swal.fire("Opps!!", "Konfirmasi Password Anda Salah", "error");
+        </script>
+    @endif
+
+    @if (Session::get('sudahlogin'))
+        <script>
+            Swal.fire("Notice", "Anda Masih Login", "success");
+        </script>
+    @endif
+@endsection

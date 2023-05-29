@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\UserDetail;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,7 +19,7 @@ class SampleJual extends Model
 
     public function userdetail()
     {
-        return $this->belongsTo(UserDetail::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\UserDetail;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +18,7 @@ class LevelDetail extends Model
 
     public function userdetail()
     {
-        return $this->hasOne(UserDetail::class);
+        return $this->hasOne(User::class);
     }
 
 }

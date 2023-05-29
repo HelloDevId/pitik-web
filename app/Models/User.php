@@ -4,15 +4,13 @@ namespace App\Models;
 
 use App\Models\SampleJual;
 use App\Models\LevelDetail;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class UserDetail extends Authenticatable
+
+class User extends Authenticatable
 {
     use HasFactory;
-
     protected $table = 'user_detail';
 
     protected $fillable = [
