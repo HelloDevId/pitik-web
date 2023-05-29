@@ -15,6 +15,24 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                        </button>
+
+
+                                        <?php
+                                        
+                                        $nomer = 1;
+                                        
+                                        ?>
+
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $nomer++ }}. {{ $error }}</li>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <!-- table -->
                                 <table class="table datatables" id="dataTable-1">
                                     <div class="align-right text-right mb-3">
@@ -228,7 +246,7 @@
     @endif
     @if (Session::get('delete'))
         <script>
-            Swal.fire(  
+            Swal.fire(
                 'Success',
                 'Data Berhasil Di Hapus',
                 'success'
