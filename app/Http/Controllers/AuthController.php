@@ -29,6 +29,7 @@ class AuthController extends Controller
 
         if ($user) {
             $userLogin = $user->id_level;
+            
         }
 
         if ($userLogin == 1) {

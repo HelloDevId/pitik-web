@@ -13,7 +13,7 @@ use App\Models\Pendapatan;
 use App\Models\Pengeluaran;
 use App\Models\SampleJual;
 use App\Models\TenagaKerja;
-use App\Models\UserDetail;
+use App\Models\User;
 use App\Models\VaksinDetail;
 
 class DatabaseSeeder extends Seeder
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'level' => 'User',
         ]);
 
-        UserDetail::create([
+        User::create([
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'user_fullname' => 'Admin',
