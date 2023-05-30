@@ -53,33 +53,33 @@ class AuthController extends Controller
         if ($request->oldpassword == null) {
             $request->validate(
                 [
-                    'name' => 'required',
-                    'email' => 'required|email|unique:tb_user,email,' . $id,
+                    'user_fullname' => 'required',
+                    'email' => 'required|email|unique:user_detail,email,' . $id,
                 ],
                 [
-                    'name.required' => 'name tidak boleh kosong',
+                    'user_fullname.required' => 'name tidak boleh kosong',
                     'email.email' => 'email tidak valid',
                     'email.required' => 'email tidak boleh kosong',
                     'email.unique' => 'email sudah terdaftar',
                 ]
             );
             $user = User::find($id);
-            $user->name = $request->name;
+            $user->user_fullname = $request->user_fullname;
             $user->email = $request->email;
             $user->save();
-            return redirect()->intended('/dashboard')->with('updateprofil', 'berhasil update profil');
+            return redirect()->intended('/index')->with('updateprofil', 'berhasil update profil');
         } else {
 
             $request->validate(
                 [
-                    'name' => 'required',
-                    'email' => 'required|email|unique:tb_user,email,' . $id,
+                    'user_fullname' => 'required',
+                    'email' => 'required|email|unique:user_detail,email,' . $id,
                     'oldpassword' => 'required',
                     'password' => 'required|min:8',
                     'repassword' => 'required|same:password',
                 ],
                 [
-                    'name.required' => 'name tidak boleh kosong',
+                    'user_fullname.required' => 'name tidak boleh kosong',
                     'email.required' => 'email tidak boleh kosong',
                     'email.email' => 'email tidak valid',
                     'email.unique' => 'email sudah terdaftar',
@@ -96,18 +96,18 @@ class AuthController extends Controller
                 if ($request->password == $request->repassword) {
 
                     $user = User::find($id);
-                    $user->name = $request->name;
+                    $user->user_fullname = $request->user_fullname;
                     $user->email = $request->email;
                     $user->password = bcrypt($request->password);
                     $user->save();
-                    return redirect()->intended('/dashboard')->with('updateprofil', 'berhasil update profil');
+                    return redirect()->intended('/index')->with('updateprofil', 'berhasil update profil');
                 } else {
 
-                    return redirect()->intended('/dashboard')->with('passwordtidaksama', 'gagal update profil');
+                    return redirect()->intended('/index')->with('passwordtidaksama', 'gagal update profil');
                 }
             } else {
 
-                return redirect()->intended('/dashboard')->with('updateprofilerror', 'gagal update profil');
+                return redirect()->intended('/index')->with('updateprofilerror', 'gagal update profil');
             }
         }
     }

@@ -86,3 +86,5 @@ Route::get('/datapendapatan', [PendapatanController::class, 'index'])->middlewar
 Route::post('/datapendapatan', [PendapatanController::class, 'store'])->middleware('IsLogin');
 Route::put('/datapendapatan/{id}', [PendapatanController::class, 'update'])->middleware('IsLogin');
 Route::delete('/datapendapatan/{id}', [PendapatanController::class, 'destroy'])->middleware('IsLogin');
+
+Route::post('/update-profile/{id}', [AuthController::class, 'profilupdate'])->middleware('IsLogin');

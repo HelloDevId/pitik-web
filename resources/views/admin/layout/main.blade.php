@@ -177,22 +177,46 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <form>
+                        <form action="/update-profile/{{ Auth::User()->id }}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Label</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <label for="recipient-name" class="col-form-label">Name</label>
+                                    <input type="text" name="user_fullname"
+                                        value="{{ Auth::User()->user_fullname }}" class="form-control"
+                                        id="recipient-name">
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Label</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <label for="recipient-name" class="col-form-label">Email</label>
+                                    <input type="email" name="email" value="{{ Auth::User()->email }}"
+                                        class="form-control" id="recipient-name">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn mb-2 btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn mb-2 btn-success">Save changes</button>
-                        </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Old Password</label>
+                                    <input type="password" name="oldpassword" class="form-control"
+                                        id="recipient-name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Password</label>
+                                    <input type="password" name="password" class="form-control" id="recipient-name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Repassword</label>
+                                    <input type="password" name="repassword" class="form-control"
+                                        id="recipient-name">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn mb-2 btn-danger"
+                                    data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn mb-2 btn-success">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

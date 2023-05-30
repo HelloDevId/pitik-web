@@ -28,6 +28,24 @@
                             </div>
                         </form>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">×</span>
+                            </button>
+
+
+                            <?php
+                            
+                            $nomer = 1;
+                            
+                            ?>
+
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $nomer++ }}. {{ $error }}</li>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 <div class="mb-2 align-items-center">
                     <div class="card shadow mb-4">
