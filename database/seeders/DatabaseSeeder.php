@@ -31,18 +31,25 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         LevelDetail::create([
-            'level' => 'Admin',
+            'level' => 'Super Admin',
         ]);
 
         LevelDetail::create([
-            'level' => 'User',
+            'level' => 'Admin',
+        ]);
+
+        User::create([
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('superadmin'),
+            'user_fullname' => 'Super Admin',
+            'id_level' => '1',
         ]);
 
         User::create([
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'user_fullname' => 'Admin',
-            'id_level' => '1',
+            'id_level' => '2',
         ]);
 
     }

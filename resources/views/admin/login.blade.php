@@ -102,7 +102,7 @@
 
 @if (Session::get('bukanadmin'))
     <script>
-        Swal.fire("Opps Error", "Anda Bukan Admin", "error");
+        Swal.fire("Opps Error", "Anda Bukan Super Admin", "error");
     </script>
 @endif
 
