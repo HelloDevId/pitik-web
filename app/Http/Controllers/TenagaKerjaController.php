@@ -29,11 +29,13 @@ class TenagaKerjaController extends Controller
                 'total_gaji.required' => 'Total Gaji tidak boleh kosong',
             ]);
 
+        $totalgaji = $request->gaji * $request->total_gaji;
+
         TenagaKerja::create([
             'nama_karyawan' => $request->nama_karyawan,
             'jabatan' => $request->jabatan,
             'gaji' => $request->gaji,
-            'total_gaji' => $request->total_gaji,
+            'total_gaji' => $totalgaji,
         ]);
 
         return redirect('/datatenagakerja')->with('create', 'Data Berhasil Ditambahkan');
@@ -54,11 +56,13 @@ class TenagaKerjaController extends Controller
                 'total_gaji.required' => 'Total Gaji tidak boleh kosong',
             ]);
 
+        $totalgaji = $request->gaji * $request->total_gaji;
+
         $tenagakerja = TenagaKerja::find($id);
         $tenagakerja->nama_karyawan = $request->nama_karyawan;
         $tenagakerja->jabatan = $request->jabatan;
         $tenagakerja->gaji = $request->gaji;
-        $tenagakerja->total_gaji = $request->total_gaji;
+        $tenagakerja->total_gaji = $totalgaji;
         $tenagakerja->save();
 
         return redirect('/datatenagakerja')->with('update', 'Data Berhasil Diubah');

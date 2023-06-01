@@ -30,11 +30,13 @@ class PendapatanController extends Controller
                 'pendapatan.required' => 'Pendapatan tidak boleh kosong',
             ]);
 
+        $pendapatan = $request->pemasukan - $request->pengeluaran;
+
         Pendapatan::create([
             'tanggal' => $request->tanggal,
             'pemasukan' => $request->pemasukan,
             'pengeluaran' => $request->pengeluaran,
-            'pendapatan' => $request->pendapatan,
+            'pendapatan' => $pendapatan,
         ]);
 
         return redirect('/datapendapatan')->with('create', 'Data Berhasil Ditambahkan');
@@ -55,11 +57,13 @@ class PendapatanController extends Controller
                 'pendapatan.required' => 'Pendapatan tidak boleh kosong',
             ]);
 
+        $total_pendapatan = $request->pemasukan - $request->pengeluaran;
+
         $pendapatan = Pendapatan::find($id);
         $pendapatan->tanggal = $request->tanggal;
         $pendapatan->pemasukan = $request->pemasukan;
         $pendapatan->pengeluaran = $request->pengeluaran;
-        $pendapatan->pendapatan = $request->pendapatan;
+        $pendapatan->pendapatan = $total_pendapatan;
         $pendapatan->save();
 
         return redirect('/datapendapatan')->with('update', 'Data Berhasil Diubah');
