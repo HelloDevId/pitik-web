@@ -16,23 +16,23 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 @if ($errors->any())
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                            aria-hidden="true">×</span>
-                                    </button>
+                                    <div class="alert alert-danger alert-dismissible fade show">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                                aria-hidden="true">×</span>
+                                        </button>
 
 
-                                    <?php
+                                        <?php
+                                        
+                                        $nomer = 1;
+                                        
+                                        ?>
 
-                                    $nomer = 1;
-
-                                    ?>
-
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $nomer++ }}. {{ $error }}</li>
-                                    @endforeach
-                                </div>
-                            @endif
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $nomer++ }}. {{ $error }}</li>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <!-- table -->
                                 <table class="table datatables" id="dataTable-1">
                                     <div class="align-right text-right mb-3">
@@ -236,10 +236,73 @@
     <script>
         $('#dataTable-1').DataTable({
             autoWidth: true,
-            "lengthMenu": [
-                [16, 32, 64, -1],
-                [16, 32, 64, "All"]
-            ]
+            // "lengthMenu": [
+            //     [16, 32, 64, -1],
+            //     [16, 32, 64, "All"]
+            // ]
+            dom: 'Bfrtip',
+
+
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+
+            buttons: [{
+                    extend: 'colvis',
+                    className: 'btn btn-primary btn-sm',
+                    text: 'Column Visibility',
+                    // columns: ':gt(0)'
+
+
+                },
+
+                {
+
+                    extend: 'pageLength',
+                    className: 'btn btn-primary btn-sm',
+                    text: 'Page Length',
+                    // columns: ':gt(0)'
+                },
+
+
+                // 'colvis', 'pageLength',
+
+                {
+                    extend: 'excel',
+                    className: 'btn btn-primary btn-sm',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+
+                // {
+                //     extend: 'csv',
+                //     className: 'btn btn-primary btn-sm',
+                //     exportOptions: {
+                //         columns: [0, ':visible']
+                //     }
+                // },
+                {
+                    extend: 'pdf',
+                    className: 'btn btn-primary btn-sm',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+
+                {
+                    extend: 'print',
+                    className: 'btn btn-primary btn-sm',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+
+                // 'pageLength', 'colvis',
+                // 'copy', 'csv', 'excel', 'print'
+
+            ],
         });
     </script>
 @endsection
