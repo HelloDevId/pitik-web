@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatatAyam;
 use App\Models\DataAyam;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,15 @@ class DataAyamController extends Controller
             'total_ayam' => $total_ayam,
         ]);
 
+        $cekdata = DataAyam::all()->last();
+
+        CatatAyam::create([
+            'id_ayam' => $cekdata->id,
+            'tanggal' => $request->tanggal_masuk,
+            'jumlah' => $request->jumlah_masuk,
+            'mati' => $request->mati,
+        ]);
+
         return redirect('/dataayam')->with('create', 'Data Berhasil Ditambahkan');
     }
 
@@ -83,12 +93,27 @@ class DataAyamController extends Controller
                 'total_ayam' => $total_ayam,
             ]);
 
+        $updatecatatayam = CatatAyam::where('id_ayam', $id)->first();
+        CatatAyam::where('id', $updatecatatayam->id)
+            ->update([
+                'tanggal' => $request->tanggal_masuk,
+                'jumlah' => $request->jumlah_masuk,
+                'mati' => $request->mati,
+            ]);
+
         return redirect('/dataayam')->with('update', 'Data Berhasil Diubah');
     }
 
     public function destroy($id)
     {
-        DataAyam::destroy($id);
-        return redirect('/dataayam')->with('delete', 'Data Berhasil Dihapus');
+        $cekcatatayam = CatatAyam::where('id_ayam', $id)->first();
+        if ($cekcatatayam) {
+            CatatAyam::find($cekcatatayam->id)->delete();
+            DataAyam::find($id)->delete();
+            return redirect('/dataayam')->with('delete', 'Data Berhasil Dihapus');
+        } else {
+            DataAyam::find($id)->delete();
+            return redirect('/dataayam')->with('delete', 'Data Berhasil Dihapus');
+        }
     }
 }

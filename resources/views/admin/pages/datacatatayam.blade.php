@@ -36,8 +36,8 @@
                                 <!-- table -->
                                 <table class="table datatables" id="dataTable-1">
                                     <div class="align-right text-right mb-3">
-                                        <button class="btn btn-success btn-sm" data-toggle="modal"
-                                            data-target="#addModal">Add</button>
+                                        {{-- <button class="btn btn-success btn-sm" data-toggle="modal"
+                                            data-target="#addModal">Add</button> --}}
                                     </div>
 
                                     <thead>
@@ -47,7 +47,7 @@
                                             <th>Tanggal</th>
                                             <th>Jumlah</th>
                                             <th>Mati</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,7 +61,7 @@
                                                 <td>{{ $data->tanggal }}</td>
                                                 <td>{{ $data->jumlah }}</td>
                                                 <td>{{ $data->mati }}</td>
-                                                <td>
+                                                {{-- <td>
 
                                                     <button class="btn btn-warning btn-sm" data-toggle="modal"
                                                         data-target="#editModal{{ $data->id }}">Edit</button>
@@ -69,7 +69,7 @@
                                                     <button class="btn btn-danger btn-sm" data-toggle="modal"
                                                         data-target="#deleteModal{{ $data->id }}">Delete</button>
 
-                                                </td>
+                                                </td> --}}
                                             </tr>
 
                                             <!-- Delete Modal -->
